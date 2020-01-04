@@ -21,7 +21,6 @@ class Usuarios extends Component {
     this.setState({
       usuarios: response.data
     });
-    console.log(this.state.usuarios);
   };
 
   ponerFilas = () =>
