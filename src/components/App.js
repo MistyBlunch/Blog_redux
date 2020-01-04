@@ -1,34 +1,19 @@
 import React from "react";
+import { BrowserRouter, Route } from "react-router-dom";
 
-const App = () => {
-  const ponerFilas = () => [
-    <tr>
-      <td>Grace</td>
-      <td>grcenikole@gmail.com</td>
-      <td>mistyblunch.com</td>
-    </tr>,
-    <tr>
-      <td>Platzi</td>
-      <td>platzi@gmail.com</td>
-      <td>platzi.com</td>
-    </tr>
-  ];
+import Menu from "./Menu";
+import Usuarios from "./usuarios";
 
-  return (
+const Tareas = () => <div>Tareas</div>;
+
+const App = () => (
+  <BrowserRouter>
+    <Menu />
     <div className="margen">
-      <table className="tabla">
-        <thead>
-          <tr>
-            <th>Nombre</th>
-            <th>Corre</th>
-            <th>Enlace</th>
-          </tr>
-        </thead>
-
-        <tbody>{ponerFilas()}</tbody>
-      </table>
+      <Route exact path="/" component={Usuarios} />
+      <Route exact path="/tareas" component={Tareas} />
     </div>
-  );
-};
+  </BrowserRouter>
+);
 
 export default App;
