@@ -1,0 +1,9 @@
+.error_page img {
+  width: 300px;
+}
+
+.error_page h1 {
+  font-size: 40px;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
