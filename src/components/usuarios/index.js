@@ -4,7 +4,7 @@ import Spinner from "../general/Spinner";
 import Fatal from "../general/Fatal";
 import Tabla from "./Tabla";
 
-import * as usuariosAction from "../../actions/usuariosAction";
+import * as usuariosActions from "../../actions/usuariosActions";
 
 class Usuarios extends Component {
   componentDidMount() {
@@ -37,4 +37,4 @@ const mapStateToProps = reducers => {
   return reducers.usuariosReducer;
 };
 
-export default connect(mapStateToProps, usuariosAction)(Usuarios);
+export default connect(mapStateToProps, usuariosActions)(Usuarios);
