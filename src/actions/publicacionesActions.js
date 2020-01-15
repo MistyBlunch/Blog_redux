@@ -1,37 +1,39 @@
 import axios from "axios";
-import { TRAER_TODOS, CARGANDO, ERROR } from "../types/publicacionesTypes";
 
-export const traerTodos = () => async dispatch => {
-  dispatch({
-    type: CARGANDO
-  });
+import * as usuariosTypes from "../types/usuariosTypes";
+import {
+  TRAER_POR_USUARIO,
+  CARGANDO,
+  ERROR
+} from "../types/publicacionesTypes";
 
-  try {
-    const response = await axios.get(
-      `https://jsonplaceholder.typicode.com/posts`
-    );
-    dispatch({
-      type: TRAER_TODOS,
-      payload: response.data
-    });
-  } catch (error) {
-    console.log(`Error: ${error.message}`);
-    dispatch({
-      type: ERROR,
-      payload: error.message
-    });
-  }
-};
+const { TRAER_TODOS: USUARIOS_TRAER_TODOS } = usuariosTypes;
 
 export const traerPorUsuario = key => async (dispatch, getState) => {
-  const { usuarios } = getState().usuariosReducer;
+  const { usuarios } = getState().usuariosReducer; //Destucturando usuarios del estado actual
+  const { publicaciones } = getState().publicacionesReducer;
   const usuario_id = usuarios[key].id;
 
   const response = await axios.get(
     `https://jsonplaceholder.typicode.com/posts?userId=${usuario_id}`
   );
+
+  const publicaciones_actualizadas = [...publicaciones, response.data];
+
+  const publicaciones_key = publicaciones_actualizadas.length - 1;
+  const usuarios_actualizados = [...usuarios];
+  usuarios_actualizados[key] = {
+    ...usuarios[key],
+    publicaciones_key
+  };
+
   dispatch({
-    type: TRAER_TODOS,
-    payload: response.data
+    type: USUARIOS_TRAER_TODOS,
+    payload: usuarios_actualizados
+  });
+
+  dispatch({
+    type: TRAER_POR_USUARIO,
+    payload: publicaciones_actualizadas
   });
 };
