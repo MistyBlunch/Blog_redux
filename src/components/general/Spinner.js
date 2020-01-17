@@ -14,7 +14,6 @@ const Spinner = props => (
       <div></div>
       <div></div>
     </div>
-    );
   </div>
 );
 
