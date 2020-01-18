@@ -15,3 +15,5 @@ export const whatever = () => (dispatch) => {
   ...
 };
 ```
+
+###### Si vas a agregar un Action func no olvides añadirlo en el _mapDispatchToProps_

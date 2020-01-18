@@ -71,3 +71,8 @@ export const abrirCerrar = (pub_key, comment_key) => (dispatch, getState) => {
     payload: publicaciones_actualizadas
   });
 };
+
+export const traerComentarios = (pub_key, comment_key) => (
+  dispatch,
+  getState
+) => {};
