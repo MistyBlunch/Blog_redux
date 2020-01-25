@@ -17,3 +17,8 @@ export const whatever = () => (dispatch) => {
 ```
 
 ###### Si vas a agregar un Action func no olvides añadirlo en el _mapDispatchToProps_
+
+###### Si quieres conectar el Action con el component lo haces: 
+```
+import * as tareasActions from '../../actions/tareasActions'
+```

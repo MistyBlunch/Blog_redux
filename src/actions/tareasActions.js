@@ -11,9 +11,20 @@ export const traerTodas = () => async dispatch => {
       "https://jsonplaceholder.typicode.com/todos"
     );
 
+    // Filtrará todas las tareas que pertenezcan al mismo usuario según su id
+    const tareas = {};
+    response.data.map((tar) => (
+      tareas[tar.userId] = {
+        ...tareas[tar.userId],
+        [tar.id]: {
+          ...tar
+        }
+      }
+    ));
+
     dispatch({
       type: TRAER_TODAS,
-      payload: response.data
+      payload: tareas
     });
   } catch (error) {
     console.log(`Error: ${error.message}`);
