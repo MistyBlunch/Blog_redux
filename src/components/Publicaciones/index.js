@@ -98,13 +98,15 @@ class Publicaciones extends Component {
       >
         <h2>{publicacion.title}</h2>
         <h3>{publicacion.body}</h3>
-        {publicacion.abierto ? <Comentarios /> : ""}
+        {publicacion.abierto ? <Comentarios comentarios={publicacion.comentarios} /> : ""}
       </div>
     ));
 
   mostrarComentarios = (pub_key, comment_key, comentarios) => {
     this.props.abrirCerrar(pub_key, comment_key);
-    this.props.traerComentarios(pub_key, comment_key);
+    if (!comentarios.length) {
+      this.props.traerComentarios(pub_key, comment_key);
+    }
   };
 
   render() {

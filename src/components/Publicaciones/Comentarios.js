@@ -1,13 +1,38 @@
 import React from "react";
+import { connect } from 'react-redux' // Para conectar con REDUX
+import Spinner from '../general/Spinner'
+import Fatal from '../general/Fatal'
 
 const Comentarios = props => {
+  if (props.cargando) {
+    return <Spinner />
+  }
+
+  if (props.error) {
+    return <Fatal mensaje={props.error} />
+  }
+
+  const ponerComentarios = () => (
+    props.comentarios.map((comentario) => (
+      <li key={comentario.id}>
+        <b>
+          <u>
+            {comentario.email}
+          </u>
+        </b>
+        <br />
+        {comentario.body}
+      </li>
+    ))
+  );
+
   return (
     <ul>
-      <li>Comentario 1</li>
-      <li>Comentario 2</li>
-      <li>Comentario 3</li>
+      {ponerComentarios()}
     </ul>
   );
 };
 
-export default Comentarios;
+const mapStateToProps = ({ publicacionesReducer }) => publicacionesReducer
+
+export default connect(mapStateToProps)(Comentarios)
