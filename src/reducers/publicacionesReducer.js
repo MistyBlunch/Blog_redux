@@ -3,7 +3,8 @@ import {
   CARGANDO,
   ERROR,
   COMMENT_CARGANDO,
-  COMMENT_ERROR
+  COMMENT_ERROR,
+  COMMENT_ACTUALIZAR
 } from "../types/publicacionesTypes";
 
 const INITIAL_STATE = {
@@ -27,6 +28,13 @@ export default (state = INITIAL_STATE, action) => {
       return { ...state, cargando: true };
     case ERROR:
       return { ...state, error: action.payload, cargando: false };
+    case COMMENT_ACTUALIZAR:
+      return {
+        ...state,
+        publicaciones: action.payload,
+        comment_cargando: false,
+        comment_error: ""
+      };
     case COMMENT_CARGANDO:
       return { ...state, comment_cargando: true };
     case COMMENT_ERROR:

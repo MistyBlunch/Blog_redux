@@ -6,7 +6,8 @@ import {
   CARGANDO,
   ERROR,
   COMMENT_CARGANDO,
-  COMMENT_ERROR
+  COMMENT_ERROR,
+  COMMENT_ACTUALIZAR
 } from "../types/publicacionesTypes";
 
 const { TRAER_TODOS: USUARIOS_TRAER_TODOS } = usuariosTypes;
@@ -103,7 +104,7 @@ export const traerComentarios = (pub_key, comment_key) => async (dispatch, getSt
     publicaciones_actualizadas[pub_key][comment_key] = actualizada;
 
     dispatch({
-      type: ACTUALIZAR,
+      type: COMMENT_ACTUALIZAR,
       payload: publicaciones_actualizadas
     });
   } catch (error) {

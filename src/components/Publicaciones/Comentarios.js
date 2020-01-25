@@ -4,12 +4,12 @@ import Spinner from '../general/Spinner'
 import Fatal from '../general/Fatal'
 
 const Comentarios = props => {
-  if (props.cargando) {
-    return <Spinner />
+  if (props.comment_error) {
+    return <Fatal mensaje={props.comment_error} />
   }
 
-  if (props.error) {
-    return <Fatal mensaje={props.error} />
+  if (props.comment_cargando && !props.comentarios.length) {
+    return <Spinner />
   }
 
   const ponerComentarios = () => (
