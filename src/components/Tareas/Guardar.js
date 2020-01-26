@@ -8,6 +8,16 @@ class Guardar extends Component {
     this.props.changeInput(e.target.name, e.target.value);
   }
 
+  guardar = () => {
+    const { user_id, titulo, agregar } = this.props;
+    const nueva_tarea = {
+      userId: user_id,
+      title: titulo,
+      completed: false
+    };
+    agregar(nueva_tarea);
+  }
+
   render() {
     return (
       <div>
@@ -30,7 +40,9 @@ class Guardar extends Component {
           onChange={this.handleChange}
         />
         <br /><br />
-        <button>
+        <button
+          onClick={this.guardar}
+        >
           Guardar
         </button>
       </div>
