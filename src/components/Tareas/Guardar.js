@@ -1,7 +1,11 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import Spinner from '../general/Spinner';
+import Fatal from '../general/Fatal';
 
-import * as tareasActions from '../../actions/tareasActions'
+import { Redirect } from 'react-router-dom';
+
+import * as tareasActions from '../../actions/tareasActions';
 
 class Guardar extends Component {
   handleChange = (e) => {
@@ -16,6 +20,28 @@ class Guardar extends Component {
       completed: false
     };
     agregar(nueva_tarea);
+  }
+
+  deshabilitar = () => {
+    const { user_id, titulo, cargando } = this.props;
+
+    if (cargando) {
+      return true;
+    }
+    if (!user_id || !titulo) {
+      return true;
+    }
+    return false;
+  }
+
+  mostrarAccion = () => {
+    const { error, cargando } = this.props;
+    if (cargando) {
+      return <Spinner />
+    }
+    if (error) {
+      return <Fatal mensaje={error} />
+    }
   }
 
   render() {
@@ -42,9 +68,11 @@ class Guardar extends Component {
         <br /><br />
         <button
           onClick={this.guardar}
+          disabled={this.deshabilitar()}
         >
           Guardar
         </button>
+        {this.mostrarAccion()}
       </div>
     )
   }

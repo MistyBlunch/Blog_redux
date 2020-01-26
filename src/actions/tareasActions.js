@@ -6,6 +6,7 @@ import {
   TAREA_AGREGADA
 } from "../types/tareasTypes";
 
+// Traer todas las tareas del usuario
 export const traerTodas = () => async dispatch => {
   dispatch({
     type: CARGANDO
@@ -40,7 +41,7 @@ export const traerTodas = () => async dispatch => {
   }
 };
 
-
+// Cambiar el input del id del usuario y el titulo ded ToDo
 export const changeInput = (name, value) => (dispatch, getState) => {
   const reducer = getState().tareasReducer;
 
@@ -55,6 +56,7 @@ export const changeInput = (name, value) => (dispatch, getState) => {
   })
 }
 
+// Agregar ToDo
 export const agregar = (nueva_tarea) => async (dispatch) => {
   dispatch({
     type: CARGANDO
