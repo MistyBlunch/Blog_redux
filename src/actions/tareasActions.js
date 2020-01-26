@@ -1,5 +1,5 @@
 import axios from "axios";
-import { TRAER_TODAS, CARGANDO, ERROR } from "../types/tareasTypes";
+import { TRAER_TODAS, CARGANDO, ERROR, UPDATED_INPUTS } from "../types/tareasTypes";
 
 export const traerTodas = () => async dispatch => {
   dispatch({
@@ -34,3 +34,18 @@ export const traerTodas = () => async dispatch => {
     });
   }
 };
+
+
+export const changeInput = (name, value) => (dispatch, getState) => {
+  const reducer = getState().tareasReducer;
+
+  const reducer_updated = {
+    ...reducer,
+    [name]: value
+  };
+
+  dispatch({
+    type: UPDATED_INPUTS,
+    payload: reducer_updated
+  })
+}
