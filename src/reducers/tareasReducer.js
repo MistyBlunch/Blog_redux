@@ -3,7 +3,8 @@ import {
   CARGANDO, ERROR,
   UPDATED_INPUTS,
   GUARDAR,
-  ACTUALIZAR
+  ACTUALIZAR,
+  LIMPIAR
 } from "../types/tareasTypes";
 
 const INITIAL_STATE = {
@@ -43,6 +44,8 @@ export default (state = INITIAL_STATE, action) => {
       }
     case ACTUALIZAR:
       return { ...state, tareas: action.payload }
+    case LIMPIAR:
+      return { ...state, user_id: '', titulo: '' }
     default:
       return state;
   }

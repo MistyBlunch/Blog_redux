@@ -4,7 +4,8 @@ import {
   CARGANDO, ERROR,
   UPDATED_INPUTS,
   GUARDAR,
-  ACTUALIZAR
+  ACTUALIZAR,
+  LIMPIAR
 } from "../types/tareasTypes";
 
 // Traer todas las tareas del usuario
@@ -67,7 +68,6 @@ export const agregar = (nueva_tarea) => async (dispatch) => {
     const response = await axios.post(
       'https://jsonplaceholder.typicode.com/todos', nueva_tarea
     );
-    console.log(response.data);
 
     dispatch({
       type: GUARDAR
@@ -82,6 +82,7 @@ export const agregar = (nueva_tarea) => async (dispatch) => {
   }
 }
 
+// Editar ToDo
 export const editar = (tarea_editada) => async (dispatch) => {
   dispatch({
     type: CARGANDO
@@ -91,7 +92,6 @@ export const editar = (tarea_editada) => async (dispatch) => {
     const response = await axios.put(
       `https://jsonplaceholder.typicode.com/todos/${tarea_editada.id}`, tarea_editada
     );
-    console.log(response.data);
 
     dispatch({
       type: GUARDAR
@@ -106,6 +106,7 @@ export const editar = (tarea_editada) => async (dispatch) => {
   }
 }
 
+// Cambio de estado del Checkbox de ToDo's
 export const cambioCheck = (usr_id, tar_id) => (dispatch, getState) => {
   const { tareas } = getState().tareasReducer;
   const seleccionada = tareas[usr_id][tar_id];
@@ -124,5 +125,32 @@ export const cambioCheck = (usr_id, tar_id) => (dispatch, getState) => {
   dispatch({
     type: ACTUALIZAR,
     payload: actualizadas
+  });
+}
+
+// Eliminar ToDo
+export const eliminar = (tar_id) => async (dispatch) => {
+  dispatch({
+    type: CARGANDO
+  });
+
+  try {
+    const response = await axios.delete(`https://jsonplaceholder.typicode.com/todos/${tar_id}`);
+
+    dispatch({
+      type: TRAER_TODAS,
+      payload: {}
+    });
+  } catch (error) {
+    dispatch({
+      type: ERROR,
+      payload: 'Servicio no disponible.'
+    });
+  }
+}
+
+export const limpiarForm = () => (dispatch) => {
+  dispatch({
+    type: LIMPIAR
   })
 }
