@@ -37,18 +37,25 @@ class Tareas extends Component {
     ))
   };
 
-  ponerTareas = (user_id) => {
+  ponerTareas = (usr_id) => {
     const { tareas } = this.props;
     const por_usuario = {
-      ...tareas[user_id]
+      ...tareas[usr_id]
     };
 
     return Object.keys(por_usuario).map((tar_id) => (
       <div key={tar_id}>
         <input type="checkbox" defaultChecked={por_usuario[tar_id].completed} />
         {
-          por_usuario[tar_id].title
-        }
+          por_usuario[tar_id].title}
+        <button className="m_left">
+          <Link to={`/tareas/guardar/${usr_id}/${tar_id}`}>
+            Editar
+          </Link>
+        </button>
+        <button className="m_left">
+          Eliminar
+        </button>
       </div>
     ));
   };
