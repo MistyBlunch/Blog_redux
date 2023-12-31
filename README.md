@@ -1,7 +1,7 @@
 # Blog Redux
 
 Requirements:
-* Node v.10
+* Node+ v.10
 
 How to run:
 ```
